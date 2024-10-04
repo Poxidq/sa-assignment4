@@ -4,12 +4,29 @@ This project implements the **Pipes and Filters** architectural pattern in Pytho
 
 ## Project Structure
 
-- **video_source.py**: Captures video frames from the webcam or a video file.
-- **filters.py**: Contains different filters to be applied (e.g., grayscale, mirror, resize, blur) and a `FilterPipeline` class that chains multiple filters.
-- **display.py**: Displays the processed frames in a real-time window.
-- **pipeline.py**: Manages the pipeline of stages (video capture, filter processing, display) and handles threading.
-- **main.py**: The entry point that initializes the pipeline, defines the stages, and starts the application.
+```
+.
+├── filters/                 # Directory for filter-related classes
+│   ├── __init__.py          
+│   ├── black_white.py       
+│   ├── mirror.py            
+│   ├── resize.py            
+│   ├── blur.py              
+│   └── pipeline.py          
+├── stages/                  # Directory for different pipeline stages
+│   ├── __init__.py          
+│   ├── video_source.py      
+│   ├── display.py           
+│   ├── filter_stage.py      
+├── core/                    # Core pipeline logic and threading
+│   ├── __init__.py          
+│   ├── pipeline.py          
+├── main.py                  # Main application entry point
+├── Dockerfile              
+├── README.md               
+└── requirements.txt        
 
+```
 
 ### Installing Dependencies
 
@@ -17,3 +34,4 @@ To install the required Python libraries:
 
 ```bash
 pip install opencv-python
+```
