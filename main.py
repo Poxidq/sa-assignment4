@@ -22,28 +22,23 @@ def display_stage(input_queue, output_queue):
 
 
 def main():
-    # Define filters to be applied
     filters = [BlackWhiteFilter(), MirrorFilter(), ResizeFilter(640, 480), BlurFilter()]
     filter_pipeline = FilterPipeline(filters)
 
-    # Create stages
     stages = [
-        video_source_stage,  # Capture video from webcam
-        lambda in_q, out_q: filter_stage(in_q, out_q, filter_pipeline),  # Apply filters
-        display_stage,  # Display processed frames
+        video_source_stage,
+        lambda in_q, out_q: filter_stage(in_q, out_q, filter_pipeline),
+        display_stage,
     ]
 
-    # Setup and run the pipeline
     pipeline = Pipeline(stages)
     pipeline.start()
 
-    # Wait for threads to finish
     try:
-        pipeline.threads[0].join()  # Wait for the video source thread to finish
+        pipeline.threads[0].join()
     except KeyboardInterrupt:
-        pass  # Gracefully handle Ctrl+C
+        pass
 
-    # Stop all threads and clean up
     pipeline.stop()
 
 
